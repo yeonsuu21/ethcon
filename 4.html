@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="includeHTML.js" type="text/js"">
+    <title>네 번째</title>
+    <style>
+      @import url("style.css");
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+      @import url("4.js");
+    </style>
+  </head>
+  <header>
+    <span class="previous"><a href="3.html">💕</a></span>
+    <span class="title">Java To Solidity</span>
+    <span class="next"><a href="5.html">💕</a></span>
+  </header>
+  <body>
+    <div class="container">
+      <div class="item">
+        <h1>개념설명</h1>
+        <div class="box">
+          <div class="text"><details>
+            <summary>pragma solidity + ^버전정보</summary>
+            <p>Pragma를 통해 솔리디티 컴파일러 버전을 제한합니다.</p>
+        </details>
+        <details>
+            <summary>Contract</summary>
+            <p>Contract를 통해 이 코드가 스마트 컨트랙트임을 나타냅니다. 솔리디티의 컨트랙트는 자바의 클래스로 나타냈습니다.<br>컨트랙트는 상속과 다형성을 지원하므로 다른 컨트랙트로부터 상속되거나 한 솔리디티 파일에 여러 개의 컨트랙트가 정의될 수 있습니다.</p>
+        </details>
+        <details>
+            <summary>Struct</summary>
+            <p>필요한 자료형들을 가지고 새롭게 정의하는 사용자 정의 타입으로 솔리디티의 구조체입니다.<br>함수 외부에서 구조체를 명시하면 storage에 저장되고 함수 내부에서 구조체를 명시하면 memory에 저장됩니다.<br>(간단하게 말하면 storage는 영구 저장, memory는 임시 저장입니다. 자세한 건 밑에 따로 설명했습니다.)</p>
+        </details>
+        <details>
+            <summary>값 타입</summary>
+            <p>bool : 논리자료형 true/false.<br>
+                int : 정수형<br>
+                uint : 부호가 없는 정수형 unsigned int. 솔리디티는 주로 uint 사용<br>
+                address : 크기가 20bytes인 이더리움 주소 값 (0xbFv15646A0…)<br>
+                bytes : 바이트. 문자열저장<br>
+                enum : 열거형<br>
+                Java와 Solidity는  값 타입을 적는 순서에 약간의 차이가 있다.<br> 
+                Java> public int a;<br>
+                Solidity> uint public a;
+            </p>
+        </details>
+        <details>
+            <summary>매핑(mapping)</summary>
+            <p>- 구조화된 데이터를 저장하는 방법.<br>
+                - Key&Value를 쌍으로 저장<br>
+                - mapping (Key(=address)=>Value(=uint))와 같은 형태로 사용<br>
+                Java> public HashMap&lt;address, Voter&gt;voters = new HashMap&lt;address, Voter&gt;;<br>
+                Solidity> mapping(address => Voter) public voters;
+            </p>
+        </details>
+        <details>
+            <summary>배열</summary>
+            <p>같은 타입의 변수들을 묶은 자료구조</p>
+        </details>
+        <details>
+            <summary>생성자(Constructor)</summary>
+            <p>-객체의 초기화가 필요하다면 생성자 안에 작성<br>
+                -생성자를 사용하려면 단 1개만 작성해야 한다. 2개 이상 사용시 오류 발생<br>
+                -생성자를 직접 작성하지 않으면 기본생성자(default constructor) 자동 생성<br>
+                -생성자의 가시성은 internal 또는 public<br>
+                >생성자는 특별한 함수이기 때문에 자바 코드에선 함수로 나타내었다. Solidity 코드로 작성할 때는 함수가 아닌 constructor로 바꾸어 작성하세요.<br>
+            </p>
+        </details>
+        <details>
+            <summary>데이터 위치</summary>
+            <p>memory<br>
+                임시적으로 저장되는 변수를 말합니다. 이는 contract 함수에 대한 외부 호출들이 일어나는 사이에 지워집니다. 매개변수와 리턴값은 memory로 선언합니다.<br><br>
+                storage<br>
+                블록체인에 영구적으로 저장되는 변수를 말합니다. 저장되는 변수의 종류는 상태 변수, 함수 내 로컬 변수가 있습니다.
+            </p>
+        </details>
+        <details>
+            <summary>msg.sender</summary>
+            <p>현재 함수를 호출한 사람 (혹은 스마트 컨트랙트)의 주소이며 모든 함수에서 이용 가능한 전역 변수입니다.</p>
+        </details>
+        <details>
+            <summary>메세지 프로퍼티(Message Properties)</summary>
+            <p>계약은 msg 프로퍼티를 사용해 계약을 호출한 사람이 보낸 메세지를 확인합니다. msg 프로퍼티는 다음과 같은 정보를 담습니다.<br>
+                <table>
+                    <tr>
+                        <th>정보</th>
+                        <th>타입</th>
+                        <th>설명</th>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>byte</td>
+                        <td>호출 데이터</td>
+                    </tr>
+                    <tr>
+                        <td>sender</td>
+                        <td>address</td>
+                        <td>계약을 호출한 이더리움 주소</td>
+                    </tr>
+                    <tr>
+                        <td>value</td>
+                        <td>uint</td>
+                        <td>계약 주소로 보낸 Ether량</td>
+                    </tr>
+                    <tr>
+                        <td>gas</td>
+                        <td>uint</td>
+                        <td>gas limit에서 함수를 호출하고 남은 가스</td>
+                    </tr>
+                </table>
+                </p>
+        </details>
+        <details>
+            <summary>Push</summary>
+            <p>Solidity는 push를 이용하여 배열에 값을 입력 한다.<br>
+                Java code><br> 
+                proposals.name=proposalNames[i];<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;proposals.voteCount=0;<br>
+                Solidity code><br>
+                proposals.push(Proposal({<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;name: proposalNames[i],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;voteCount: 0<br>
+                })
+                </p>
+        </details>
+        <details>
+            <summary>접근제어자(가시성)</summary>
+            <p>-external : 외부컨트랙트만 접근가능(같은 함수 내부에서 호출되면 안됨), 상태변수는 external 불가능<br><br>
+                -internal : 컨트랙트 내부호출가능, 상속받은 컨트랙트도 호출가능, 상태변수는 디폴트로 internal 선언<br><br>
+                -public : 컨트랙트 내부호출 가능, 상속받은 컨트랙트도 호출가능, 외부컨트랙트도 호출가능<br><br>
+                -private: 컨트랙트 내부만 호출가능
+                </p>
+        </details>
+        <details>
+            <summary>함수(function)</summary>
+            <p>기본적으로 함수는 public.<br>
+                함수는 다음과 같이 사용한다. 자바 함수와는 순서가 약간 다르다.<br>
+                솔리디티 코드 ex><br>
+                fuction nameA(address a) public view returns(uint b) {<br>
+                // 함수 내용<br>
+                }
+                </p>
+        </details>
+        <details>
+            <summary>returns</summary>
+            <p>솔리디티는 반환값의 타입을 지정해줘야하며 다중 반환값 처리는 순서대로 처리 된다.</p>
+        </details>
+        <details>
+            <summary>함수제어자(function modifier)</summary>
+            <p>-View : 데이터를 읽을 수만 있습니다. 상태 변화가 없는 함수에는 view를 붙입니다. 즉, 함수는 데이터를 보기만하고 변경하지 않는다는 뜻입니다.<br><br>
+                -pure : 어떤 데이터도 접근하지 않는 것을 의미합니다. 함수에 전달된 인자값에 따라서 반환값이 정해집니다.
+                </p>
+        </details>
+        <details>
+            <summary>require</summary>
+            <p>함수 실행 전에 참이어야 하는 특정 조건을 확인하는 데 사용합니다. 특정 조건이 참이 아닐 때 함수가 에러 메세지를 발생하고 실행을 멈추게 됩니다.<br>
+                자바 코드><br>
+                if (msg.sender != chairperson) { <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Only chairperson can give right to vote.");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;System.exit(0); // 실행 멈추는 코드<br>
+                }<br>
+                솔리디티 코드><br>
+                require(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;msg.sender == chairperson,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"Only chairperson can give right to vote."<br>
+                );
+                </p>
+        </details>
+        <details>
+            <summary>event</summary>
+            <p>event는 Dapp의 데이터 출력 수단(Log)입니다. 이벤트를 선언 후 이 이벤트를 호출하면 매개변수값과 함께 호출한 기록이 Transaction Receipt 라 불리는 트랜잭션 결과에 저장됩니다.<br>
+                (DApp이란 스마트 컨트랙트를 구현한 블록체인의 탈중앙화 분산 애플리케이션)
+                </p>
+        </details>
+        <details>
+            <summary>_</summary>
+            <p>함수 인자명 앞 또는 private 제한자가 붙은 함수명 앞에 _를 붙여야합니다.</p>
+        </details>
+        <details>
+            <summary>transfer</summary>
+            <p>계약이 다른 이에게 Ether를 전송하는 함수입니다.</p>
+        </details>
+        <details>
+            <summary>send</summary>
+            <p>send는 address의 멤버변수로 해당 주소에게로 송금하는 함수입니다.</p>
+        </details>
+        <details>
+            <summary>함수제어자(modifier)</summary>
+            <p>함수가 실행되기 전에 요구조건을 만족시키는지 확인하는 작업을 해줍니다.<br>
+                다른 함수들에 대한 접근을 제어하기 위해 사용되는 유사 함수입니다. 보통 함수 실행 전에 요구사항 충족 여부를 확인하는데 사용합니다.<br>
+                함수 인자명 앞 또는 private 제한자가 붙은 함수명 앞에 _를 붙여야합니다.<br>
+                선언과 사용은 함수 제어자 마지막에 _;를 붙여 나머지 내용을 실행할 수 있도록 해주어야합니다.<br>
+                </p>
+        </details>
+        <details>
+            <summary>payable</summary>
+            <p>payable 키워드는 계약 계정에 외부에서 이더를 송금 받을 수 있도록 합니다. 즉, 계약이 A에게 송금을 받으려면 A가 호출하는 함수에 payable 키워드가 있어야합니다.<br>
+                payable 함수는 다음과 같이 사용합니다.<br>
+                function 함수이름() payable public { <br>
+                //함수 내용<br>
+                }
+                </p>
+        </details>
+        <details>
+            <summary>enum</summary>
+            <p>Enum은 열거형으로 사용자 정의 타입을 만드는 한 가지 방법입니다. <br>
+                - 열거형(index를 부여한 자료형)<br>
+                - 값을 정수타입으로 리턴
+                </p>
+        </details>
+        <details>
+            <summary>emit</summary>
+            <p>emit이란 키워드를 이용하여 이벤트를 발생시킨다</p>
+        </details>
+        <details>
+            <summary>selfdestruct</summary>
+            <p>받는 사람 주소를 뜻하며 현재 컨트랙트를 삭제하고 계정의 나머지 이더를 받는 사람 주소로 보냅니다.</p>
+        </details>
+        <details>
+            <summary>어셈블리(assembly)</summary>
+            <p>low level에서 EVM에 접근하는 방법입니다.</p>
+        </details>
+        </div>
+          
+        </div>
+      </div>
+      <div class="item">
+        <h1>안전한 원격 구매</h1>
+        <div class="box">
+          <div class="text">
+            <p>
+                현재 원격으로 상품을 구매하려면 서로를 신뢰해야하는 판매자와 구매자가 필요합니다.<br />
+                이 거래에서 문제가 되는 부분은 상품의 배송입니다. 상품이 구매자에게 도착했는지 확인할 방법이
+                없습니다.<br />
+                </p>
+                <p>
+                1. 구매자와 판매자는 상품 가치의 두 배를 계약에 에스크로로 입력해야한다. 입력하자마자 돈은 구매자가 상품을 받았음을 확인할 때까지 계약 내에 고정되어 있다.<br />
+                2. 구매자는 예치금의 절반을 반환하고 판매자는 가치의 3배(예치금+가치)를 받는다.<br />
+                3. 아이디어 뒤에 숨겨진 의미는 구매자와 판매자가 상황을 해결하려는 인센티브가 있거나 그렇지 않으면 그들의 돈이 영원히 잠겨 있다는 뜻이다.<br />
+                물론 이 계약은 문제를 해결하지 못하지만 계약 내에서 상태 기계와 같은 구조를 사용할 수 있는 방법에 대한 개요를 제공합니다.<br />
+                </p>
+                <pre>
+public class Purchase {
+    
+public static void main(String[] args) {
+    public uint value;
+    public address payable seller;
+    public address payable buyer;
+                     
+    enum State { Created, Locked, Release, Inactive }
+    // The state variable has a default value of the first member, `State.created`
+    State public state;
+                     
+        modifier condition(bool _condition) {
+            if (!_condition) System.exit(0);
+                _;
+        }
+                     
+        modifier onlyBuyer() {
+            if (msg.sender != buyer) {
+                System.out.println("Only buyer can call this.");
+                System.exit(0); 
+            }
+            _;
+        }
+                     
+        modifier onlySeller() {
+            if (msg.sender != seller) {
+                System.out.println("Only seller can call this.");
+                System.exit(0); 
+            }
+            _;
+        }
+                     
+        modifier inState(State _state) {
+            if (state != _state) {
+                System.out.println("Invalid state.");
+                System.exit(0);
+            }
+            _;
+        }
+                     
+        event Aborted();
+        event PurchaseConfirmed();
+        event ItemReceived();
+        event SellerRefunded();
+                     
+        public Purchase() payable {
+            seller = msg.sender;
+            value = msg.value / 2;
+            if ((2 * value) != msg.value) { 
+                System.out.println("Value has to be even.");
+                System.exit(0);
+            }
+        }
+                     
+        public void abort() onlySeller inState(State.Created) {
+            emit Aborted();
+            state = State.Inactive;
+                     
+            seller.transfer(address(this).balance);// *this 는 현재 실행중인 contract 계정 주소입니다.
+            }
+                     
+        public void confirmPurchase() inState(State.Created) condition(msg.value == (2 * value)) payable {
+            emit PurchaseConfirmed();
+            buyer = msg.sender;
+            state = State.Locked;
+        }
+                     
+        public void confirmReceived() onlyBuyer inState(State.Locked)
+        {
+            emit ItemReceived();
+            state = State.Release; 
+            buyer.transfer(value);
+        }
+                     
+        public void refundSeller() onlySeller inState(State.Release) {
+            emit SellerRefunded();
+            state = State.Inactive;
+                     
+            seller.transfer(3 * value);
+        }
+    }
+}
+                </pre>
+                </div>
+            </div>
+          </div>           
+      <div class="item">
+        <h1>입력창</h1>
+        <div class="box">
+          <div class="text">
+            
+                <pre>
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.7.0;
+
+contract Purchase {
+    uint public value;
+    address payable public seller;
+    address payable public buyer;
+
+    enum State { Created, Locked, Release, Inactive }
+    // The state variable has a default value of the first member, `State.created`
+    State public state;
+
+    modifier condition(bool _condition) {
+        require(_condition);
+        _;
+    }
+
+    modifier onlyBuyer() {
+        require(
+            msg.sender == buyer,
+            "Only buyer can call this."
+        );
+        _;
+    }
+
+    modifier onlySeller() {
+        require(
+            msg.sender == seller,
+            "Only seller can call this."
+        );
+        _;
+    }
+
+    modifier inState(State _state) {
+        require(
+            state == _state,
+            "Invalid state."
+        );
+        _;
+    }
+
+    event Aborted();
+    event PurchaseConfirmed();
+    event ItemReceived();
+    event SellerRefunded();
+
+    // Ensure that `msg.value` is an even number.
+    // Division will truncate if it is an odd number.
+    // Check via multiplication that it wasn't an odd number.
+    constructor() payable {
+        seller = msg.sender;
+        value = msg.value / 2;
+        require((2 * value) == msg.value, "Value has to be even.");
+    }
+
+    /// Abort the purchase and reclaim the ether.
+    /// Can only be called by the seller before
+    /// the contract is locked.
+    function abort()
+        public
+        onlySeller
+        inState(State.Created)
+    {
+        emit Aborted();
+        state = State.Inactive;
+        // We use transfer here directly. It is
+        // reentrancy-safe, because it is the
+        // last call in this function and we
+        // already changed the state.
+        seller.transfer(address(this).balance);
+    }
+
+    /// Confirm the purchase as buyer.
+    /// Transaction has to include `2 * value` ether.
+    /// The ether will be locked until confirmReceived
+    /// is called.
+    </pre>
+    <form action="" id="my_form_5">
+    <textarea id="code2" name="code" placeholder="코드를 입력해주세요."></textarea>
+    <input type="submit" value="제출하기" id="_submit2" /><br />
+    </form>
+<!--
+    function confirmPurchase()
+        public
+        inState(State.Created)
+        condition(msg.value == (2 * value))
+        payable
+    {
+        emit PurchaseConfirmed();
+        buyer = msg.sender;
+        state = State.Locked;
+    }
+-->
+    <pre>
+    /// Confirm that you (the buyer) received the item.
+    /// This will release the locked ether.
+    function confirmReceived()
+        public
+        onlyBuyer
+        inState(State.Locked)
+    {
+        emit ItemReceived();
+        // It is important to change the state first because
+        // otherwise, the contracts called using `send` below
+        // can call in again here.
+    </pre>
+       <!-- state = State.Release;
+
+        buyer.transfer(value); -->
+        <form action="" id="my_form_4">
+        <textarea id="code1" name="code" placeholder="코드를 입력해주세요."></textarea>
+        <input type="submit" value="제출하기" id="_submit1" /><br />
+        </form>
+
+        
+
+
+    <pre>
+    }
+
+    /// This function refunds the seller, i.e.
+    /// pays back the locked funds of the seller.
+    function refundSeller()
+        public
+        onlySeller
+        inState(State.Release)
+    {
+        emit SellerRefunded();
+        // It is important to change the state first because
+        // otherwise, the contracts called using `send` below
+        // can call in again here.
+        state = State.Inactive;
+
+        seller.transfer(3 * value);
+    }
+}
+
+                </pre>
+              
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./answer.js"></script>
+  </body>
+</html>

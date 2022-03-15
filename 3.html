@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="includeHTML.js" type="text/js"">
+    <title>세 번째</title>
+    <style>
+      @import url("style.css");
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+      @import url("includeHTML.js");
+    </style>
+  </head>
+  <header>
+    <header>
+        <span class="previous"><a href="2.html">💕</a></span>
+        <span class="title">Java To Solidity</span>
+        <span class="next"><a href="4.html">💕</a></span>
+    </header>
+  </header>
+  <body>
+    <div class="container">
+      <div class="item">
+        <h1>개념설명</h1>
+        <div class="box">
+          <div class="text"><details>
+            <summary>pragma solidity + ^버전정보</summary>
+            <p>Pragma를 통해 솔리디티 컴파일러 버전을 제한합니다.</p>
+        </details>
+        <details>
+            <summary>Contract</summary>
+            <p>Contract를 통해 이 코드가 스마트 컨트랙트임을 나타냅니다. 솔리디티의 컨트랙트는 자바의 클래스로 나타냈습니다.<br>컨트랙트는 상속과 다형성을 지원하므로 다른 컨트랙트로부터 상속되거나 한 솔리디티 파일에 여러 개의 컨트랙트가 정의될 수 있습니다.</p>
+        </details>
+        <details>
+            <summary>Struct</summary>
+            <p>필요한 자료형들을 가지고 새롭게 정의하는 사용자 정의 타입으로 솔리디티의 구조체입니다.<br>함수 외부에서 구조체를 명시하면 storage에 저장되고 함수 내부에서 구조체를 명시하면 memory에 저장됩니다.<br>(간단하게 말하면 storage는 영구 저장, memory는 임시 저장입니다. 자세한 건 밑에 따로 설명했습니다.)</p>
+        </details>
+        <details>
+            <summary>값 타입</summary>
+            <p>bool : 논리자료형 true/false.<br>
+                int : 정수형<br>
+                uint : 부호가 없는 정수형 unsigned int. 솔리디티는 주로 uint 사용<br>
+                address : 크기가 20bytes인 이더리움 주소 값 (0xbFv15646A0…)<br>
+                bytes : 바이트. 문자열저장<br>
+                enum : 열거형<br>
+                Java와 Solidity는  값 타입을 적는 순서에 약간의 차이가 있다.<br> 
+                Java> public int a;<br>
+                Solidity> uint public a;
+            </p>
+        </details>
+        <details>
+            <summary>매핑(mapping)</summary>
+            <p>- 구조화된 데이터를 저장하는 방법.<br>
+                - Key&Value를 쌍으로 저장<br>
+                - mapping (Key(=address)=>Value(=uint))와 같은 형태로 사용<br>
+                Java> public HashMap&lt;address, Voter&gt;voters = new HashMap&lt;address, Voter&gt;;<br>
+                Solidity> mapping(address => Voter) public voters;
+            </p>
+        </details>
+        <details>
+            <summary>배열</summary>
+            <p>같은 타입의 변수들을 묶은 자료구조</p>
+        </details>
+        <details>
+            <summary>생성자(Constructor)</summary>
+            <p>-객체의 초기화가 필요하다면 생성자 안에 작성<br>
+                -생성자를 사용하려면 단 1개만 작성해야 한다. 2개 이상 사용시 오류 발생<br>
+                -생성자를 직접 작성하지 않으면 기본생성자(default constructor) 자동 생성<br>
+                -생성자의 가시성은 internal 또는 public<br>
+                >생성자는 특별한 함수이기 때문에 자바 코드에선 함수로 나타내었다. Solidity 코드로 작성할 때는 함수가 아닌 constructor로 바꾸어 작성하세요.<br>
+            </p>
+        </details>
+        <details>
+            <summary>데이터 위치</summary>
+            <p>memory<br>
+                임시적으로 저장되는 변수를 말합니다. 이는 contract 함수에 대한 외부 호출들이 일어나는 사이에 지워집니다. 매개변수와 리턴값은 memory로 선언합니다.<br><br>
+                storage<br>
+                블록체인에 영구적으로 저장되는 변수를 말합니다. 저장되는 변수의 종류는 상태 변수, 함수 내 로컬 변수가 있습니다.
+            </p>
+        </details>
+        <details>
+            <summary>msg.sender</summary>
+            <p>현재 함수를 호출한 사람 (혹은 스마트 컨트랙트)의 주소이며 모든 함수에서 이용 가능한 전역 변수입니다.</p>
+        </details>
+        <details>
+            <summary>메세지 프로퍼티(Message Properties)</summary>
+            <p>계약은 msg 프로퍼티를 사용해 계약을 호출한 사람이 보낸 메세지를 확인합니다. msg 프로퍼티는 다음과 같은 정보를 담습니다.<br>
+                <table>
+                    <tr>
+                        <th>정보</th>
+                        <th>타입</th>
+                        <th>설명</th>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>byte</td>
+                        <td>호출 데이터</td>
+                    </tr>
+                    <tr>
+                        <td>sender</td>
+                        <td>address</td>
+                        <td>계약을 호출한 이더리움 주소</td>
+                    </tr>
+                    <tr>
+                        <td>value</td>
+                        <td>uint</td>
+                        <td>계약 주소로 보낸 Ether량</td>
+                    </tr>
+                    <tr>
+                        <td>gas</td>
+                        <td>uint</td>
+                        <td>gas limit에서 함수를 호출하고 남은 가스</td>
+                    </tr>
+                </table>
+                </p>
+        </details>
+        <details>
+            <summary>Push</summary>
+            <p>Solidity는 push를 이용하여 배열에 값을 입력 한다.<br>
+                Java code><br> 
+                proposals.name=proposalNames[i];<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;proposals.voteCount=0;<br>
+                Solidity code><br>
+                proposals.push(Proposal({<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;name: proposalNames[i],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;voteCount: 0<br>
+                })
+                </p>
+        </details>
+        <details>
+            <summary>접근제어자(가시성)</summary>
+            <p>-external : 외부컨트랙트만 접근가능(같은 함수 내부에서 호출되면 안됨), 상태변수는 external 불가능<br><br>
+                -internal : 컨트랙트 내부호출가능, 상속받은 컨트랙트도 호출가능, 상태변수는 디폴트로 internal 선언<br><br>
+                -public : 컨트랙트 내부호출 가능, 상속받은 컨트랙트도 호출가능, 외부컨트랙트도 호출가능<br><br>
+                -private: 컨트랙트 내부만 호출가능
+                </p>
+        </details>
+        <details>
+            <summary>함수(function)</summary>
+            <p>기본적으로 함수는 public.<br>
+                함수는 다음과 같이 사용한다. 자바 함수와는 순서가 약간 다르다.<br>
+                솔리디티 코드 ex><br>
+                fuction nameA(address a) public view returns(uint b) {<br>
+                // 함수 내용<br>
+                }
+                </p>
+        </details>
+        <details>
+            <summary>returns</summary>
+            <p>솔리디티는 반환값의 타입을 지정해줘야하며 다중 반환값 처리는 순서대로 처리 된다.</p>
+        </details>
+        <details>
+            <summary>함수제어자(function modifier)</summary>
+            <p>-View : 데이터를 읽을 수만 있습니다. 상태 변화가 없는 함수에는 view를 붙입니다. 즉, 함수는 데이터를 보기만하고 변경하지 않는다는 뜻입니다.<br><br>
+                -pure : 어떤 데이터도 접근하지 않는 것을 의미합니다. 함수에 전달된 인자값에 따라서 반환값이 정해집니다.
+                </p>
+        </details>
+        <details>
+            <summary>require</summary>
+            <p>함수 실행 전에 참이어야 하는 특정 조건을 확인하는 데 사용합니다. 특정 조건이 참이 아닐 때 함수가 에러 메세지를 발생하고 실행을 멈추게 됩니다.<br>
+                자바 코드><br>
+                if (msg.sender != chairperson) { <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Only chairperson can give right to vote.");<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;System.exit(0); // 실행 멈추는 코드<br>
+                }<br>
+                솔리디티 코드><br>
+                require(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;msg.sender == chairperson,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"Only chairperson can give right to vote."<br>
+                );
+                </p>
+        </details>
+        <details>
+            <summary>event</summary>
+            <p>event는 Dapp의 데이터 출력 수단(Log)입니다. 이벤트를 선언 후 이 이벤트를 호출하면 매개변수값과 함께 호출한 기록이 Transaction Receipt 라 불리는 트랜잭션 결과에 저장됩니다.<br>
+                (DApp이란 스마트 컨트랙트를 구현한 블록체인의 탈중앙화 분산 애플리케이션)
+                </p>
+        </details>
+        <details>
+            <summary>_</summary>
+            <p>함수 인자명 앞 또는 private 제한자가 붙은 함수명 앞에 _를 붙여야합니다.</p>
+        </details>
+        <details>
+            <summary>transfer</summary>
+            <p>계약이 다른 이에게 Ether를 전송하는 함수입니다.</p>
+        </details>
+        <details>
+            <summary>send</summary>
+            <p>send는 address의 멤버변수로 해당 주소에게로 송금하는 함수입니다.</p>
+        </details>
+        <details>
+            <summary>함수제어자(modifier)</summary>
+            <p>함수가 실행되기 전에 요구조건을 만족시키는지 확인하는 작업을 해줍니다.<br>
+                다른 함수들에 대한 접근을 제어하기 위해 사용되는 유사 함수입니다. 보통 함수 실행 전에 요구사항 충족 여부를 확인하는데 사용합니다.<br>
+                함수 인자명 앞 또는 private 제한자가 붙은 함수명 앞에 _를 붙여야합니다.<br>
+                선언과 사용은 함수 제어자 마지막에 _;를 붙여 나머지 내용을 실행할 수 있도록 해주어야합니다.<br>
+                </p>
+        </details>
+        <details>
+            <summary>payable</summary>
+            <p>payable 키워드는 계약 계정에 외부에서 이더를 송금 받을 수 있도록 합니다. 즉, 계약이 A에게 송금을 받으려면 A가 호출하는 함수에 payable 키워드가 있어야합니다.<br>
+                payable 함수는 다음과 같이 사용합니다.<br>
+                function 함수이름() payable public { <br>
+                //함수 내용<br>
+                }
+                </p>
+        </details>
+        <details>
+            <summary>enum</summary>
+            <p>Enum은 열거형으로 사용자 정의 타입을 만드는 한 가지 방법입니다. <br>
+                - 열거형(index를 부여한 자료형)<br>
+                - 값을 정수타입으로 리턴
+                </p>
+        </details>
+        <details>
+            <summary>emit</summary>
+            <p>emit이란 키워드를 이용하여 이벤트를 발생시킨다</p>
+        </details>
+        <details>
+            <summary>selfdestruct</summary>
+            <p>받는 사람 주소를 뜻하며 현재 컨트랙트를 삭제하고 계정의 나머지 이더를 받는 사람 주소로 보냅니다.</p>
+        </details>
+        <details>
+            <summary>어셈블리(assembly)</summary>
+            <p>low level에서 EVM에 접근하는 방법입니다.</p>
+        </details>
+        </div>
+          
+        </div>
+      </div>
+      <div class="item">
+        <h1>블라인드경매</h1>
+        <div class="box">
+          <div class="text">
+            <pre>
+class Bid {
+    bytes32 blindedBid;
+    uint deposit;
+}
+
+public class BlindAuction {
+
+    public static void main(String[] args) {
+      
+        public address payablebeneficiary;
+        public uint biddingEnd;
+        public uint revealEnd;
+        public bool ended;
+
+        public HashMap &lt;address,Bid[]> pendingReturns = new HashMap&lt;address,Bid[]>();
+
+        public address highestBidder;
+        public uint highestBid;
+
+
+        HashpMap&lt;address,uint> pendingReturns = new HashMap&lt;address,Bid[]>();
+
+        event AuctionEnded(address winner, uint highestBid); 
+
+        modifier onlyBefore(uint _time) { if(now >= _time) System.exit(0); _; }
+        modifier onlyAfter(uint _time) { if(now &lt;= _time) System.exit(0); _; }
+
+        public BlindAuction(uint _biddingTime, uint _revealTime, address payable_beneficiary) {
+            beneficiary = _beneficiary;
+            biddingEnd = block.timestamp + _biddingTime;
+            revealEnd = biddingEnd + _revealTime;
+        }
+
+        public bid (bytes32 _blindedBid) payable onlyBefore(biddingEnd) {
+          
+            Bid[msg.sender].blindedBid=_blindedBid;
+            Bid[msg.sender].deposit=msg.value;
+        }
+
+        public void reveal(uint[] _values, bool[] _fake, bytes32[] _secret) onlyAfter(biddingEnd) onlyBefore(revealEnd) {
+            uint length = bids[msg.sender].length;
+            if (_values.length != length) System.exit(0);
+            if(_fake.length != length) System.exit(0);
+            if(_secret.length != length) System.exit(0);
+
+            uint refund;
+            for (uint i = 0; i &lt; length; i++) {
+                Bid storage bidToCheck = bids[msg.sender][i];
+                uint value = values[i];
+                bool fake = _fake[i];
+                bytes32 secret = _secret[i];
+              
+                if (bid.blindedBid != keccak256(value, fake, secret)) {
+                    continue;
+                }
+                refund += bid.deposit;
+                if (!fake && bid.deposit >= value) {
+                    if (placeBid(msg.sender, value))
+                        refund -= value;
+                }
+              
+                bid.blindedBid = bytes32(0);
+            }
+            msg.sender.transfer(refund);
+        }
+
+    
+        internal bool placeBid(address bidder, uint value) {
+            bool success;
+            if (value &lt;= highestBid) {
+                return false;
+            }
+            if (highestBidder != address(0) {
+                pendingReturns[highestBidder] += highestBid;
+            }
+            highestBid = value;
+            highestBidder = bidder;
+            return true;
+
+        public void withdraw() {
+            uint amount = pendingReturns[msg.sender];
+            if (amount > 0) {
+
+                pendingReturns[msg.sender] = 0;
+
+                msg.sender.transfer(amount);
+            }
+        }
+
+        public void auctionEnd() onlyAfter(revealEnd) {
+            if (ended) {
+                System.exit(0);
+            }
+            emit AuctionEnded(highestBidder, highestBid);
+            ended = true;
+            beneficiary.transfer(highestBid);
+        }
+    }
+}
+            </pre>
+            </div>
+        </div>
+      </div>
+      <div class="item">
+        <h1>입력창</h1>
+        <div class="box">
+          <div class="text">
+            <pre>
+pragma solidity ^0.4.21;
+            </pre>
+        
+                     <form action="" id="my_form_9">
+                         <textarea id="code9" name="code" placeholder="코드를 입력해주세요."></textarea>
+                             <input type="submit" value="제출하기" id="_submit9"><br>
+                    </form>
+                <pre>
+        bytes32 blindedBid;
+        uint deposit;
+    }
+        
+    address public beneficiary;
+    uint public biddingEnd;
+    uint public revealEnd;
+    bool public ended;
+        
+    mapping(address => Bid[]) public bids;
+        
+    address public highestBidder;
+    uint public highestBid;
+        
+    // 이전 가격 제시의 허락된 출금
+    mapping(address => uint) pendingReturns;
+        
+    event AuctionEnded(address winner, uint highestBid);
+        
+    /// Modifier는 함수 입력값을 입증하는 편리한 방법입니다.
+    /// `onlyBefore`은 아래의 'bid'에 적용 되어 질 수 있습니다:
+    /// 이 새로운 함수 몸체는 `_`이 오래된 함수 몸체를 대체하는
+    /// Modifier의 몸체 입니다.
+    modifier onlyBefore(uint _time) { require(now &lt; _time); _; }
+    modifier onlyAfter(uint _time) { require(now > _time); _; }
+        </pre>
+                <form action="" id="my_form_10">
+                    <textarea id="code10" name="code" placeholder="코드를 입력해주세요."></textarea>
+                    <input type="submit" value="제출하기" id="_submit10"><br>
+                </form>
+            <pre>
+        uint _biddingTime,
+        uint _revealTime,
+        address _beneficiary
+    ) public {
+        beneficiary = _beneficiary;
+        biddingEnd = now + _biddingTime;
+        revealEnd = biddingEnd + _revealTime;
+    }
+        
+    /// `_blindedBid` = keccak256(value, fake, secret)와 함께
+    /// 가려진(blinded) 가격을 제시합니다.
+    /// 만약 가격 제시가 드러내는 단계에서 올바르게 보여진다면
+    /// 보내진 이더는 환급받을 수 만 있습니다.
+    /// 가격 제시와 함께 보내진 이더는 적어도 "value"와"fake" 는 참입니다.
+    /// "fake"를 참으로 설정하고 정확하지 않은 양을 보내는 것은 진짜 가격 제시를
+    /// 숨기는 방법들입니다. 그러나 여전히 요구되는 출금을 합니다. 같은
+    /// 주소는 여러 가격 제시들을 둘 수 있습니다.
+    function bid(bytes32 _blindedBid)
+        public
+        payable
+        onlyBefore(biddingEnd)
+    {
+        bids[msg.sender].push(Bid({
+            blindedBid: _blindedBid,
+            deposit: msg.value
+        }));
+    }
+        
+    /// Reveal your blinded bids. You will get a refund for all
+    /// correctly blinded invalid bids and for all bids except for
+    /// the totally highest.
+    /// 가려진 가격 제시를 드러냅니다. 너는 알맞게 가려진 유효하지 않은
+    /// 가격 제시들을 되돌려 받을 것입니다. 그리고 가장 높은 가격 제시를 제외하고
+    /// 모든 가격 제시도 돌려 받을 것입니다.
+    function reveal(
+        uint[] _values,
+        bool[] _fake,
+        bytes32[] _secret
+    )
+        public
+        onlyAfter(biddingEnd)
+        onlyBefore(revealEnd)
+    {
+        uint length = bids[msg.sender].length;
+        require(_values.length == length);
+        require(_fake.length == length);
+        require(_secret.length == length);
+        
+        uint refund;
+        for (uint i = 0; i &lt; length; i++) {
+            var bid = bids[msg.sender][i];
+            var (value, fake, secret) = (_values[i], _fake[i], _secret[i]);
+            if (bid.blindedBid != keccak256(value, fake, secret)) {
+                // 가격 제시는 실제로 드러나지 않습니다.
+                // Do not refund deposit.
+                continue;
+            }
+                </pre>
+                    <form action="" id="my_form_11">
+                        <textarea id="code11" name="code" placeholder="코드를 입력해주세요."></textarea>
+                        <input type="submit" value="제출하기" id="_submit11"><br>
+                    </form>
+                    <pre>
+            if (!fake && bid.deposit >= value) {
+                if (placeBid(msg.sender, value))
+                    refund -= value;
+            }
+            // Make it impossible for the sender to re-claim
+            // the same deposit.
+            bid.blindedBid = bytes32(0);
+        }
+        msg.sender.transfer(refund);
+    }
+        
+    // 이것은 이 함수가 이 콘트렉트 안에서 이것 스스로만 호출 될 수
+    // 있다는 의미를 가지는 "internal" 함수입니다.
+    // (혹은 파생된 콘트렉트들에서)
+    function placeBid(address bidder, uint value) internal
+            returns (bool success)
+    {
+        if (value &lt;= highestBid) {
+            return false;
+        }
+        if (highestBidder != 0) {
+            // 이전에 가장 높은 가격 제시를 환급
+            pendingReturns[highestBidder] += highestBid;
+        }
+        highestBid = value;
+        highestBidder = bidder;
+        return true;
+    }
+        
+    /// Withdraw a bid that was overbid.</pre>
+            <form action="" id="my_form_12">
+                <textarea id="code12" name="code" placeholder="코드를 입력해주세요."></textarea>
+                <input type="submit" value="제출하기" id="_submi12"><br>
+            </form>
+            <pre>
+        uint amount = pendingReturns[msg.sender];
+        if (amount > 0) {
+            // It is important to set this to zero because the recipient
+            // can call this function again as part of the receiving call
+            // before `transfer` returns (see the remark above about
+            // conditions -> effects -> interaction).
+            pendingReturns[msg.sender] = 0;
+        
+            msg.sender.transfer(amount);
+        }
+    }
+        
+    /// 경매를 끝내고 가장 높은 가격 제시를 수혜자에게
+    /// 송금합니다.
+    function auctionEnd()
+        public
+        onlyAfter(revealEnd)
+    {
+        require(!ended);
+        emit AuctionEnded(highestBidder, highestBid);
+        ended = true;
+        beneficiary.transfer(highestBid);
+    }
+}
+        
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./answer.js"></script>
+  </body>
+</html>

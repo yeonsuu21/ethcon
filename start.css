@@ -1,0 +1,67 @@
+header {
+  border: 2px solid pink;
+  background-color: black;
+  color: pink;
+  text-align: center;
+}
+
+body {
+  color: pink;
+  background-color: black;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.item {
+  width: 120vw;
+  height: 80vh;
+  padding-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item:nth-child(1) {
+  border: 3px solid pink;
+  text-align: center;
+}
+
+.item:nth-child(2) {
+  border-top: 3px solid pink;
+  border-bottom: 3px solid pink;
+  border-right: 3px solid pink;
+  text-align: center;
+}
+
+#Solidity {
+  background-color: pink;
+  width: 35vw;
+  height: 20vh;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+#Vyper {
+  background-color: pink;
+  width: 35vw;
+  height: 20vh;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.box {
+  padding-bottom: 20vh;
+}
+
+html {
+  font-family: "JetBrains Mono", monospace;
+}
+
+#Solidity:hover {
+  background-color: aliceblue;
+}

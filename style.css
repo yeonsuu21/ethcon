@@ -1,0 +1,350 @@
+@import url("includeHTML.js");
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.item {
+  width: 80vw;
+  height: 80vh;
+  padding-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item:nth-child(1) {
+  border-top: 3px solid pink;
+  border-bottom: 3px solid pink;
+  border-left: 3px solid pink;
+}
+
+.item:nth-child(2) {
+  border: 3px solid pink;
+}
+
+.item:nth-child(3) {
+  border-top: 3px solid pink;
+  border-bottom: 3px solid pink;
+  border-right: 3px solid pink;
+}
+
+.text {
+  width: 28vw;
+  height: 70vh;
+  border: 1px solid pink;
+  overflow: auto;
+  color: pink;
+  padding: 10px 10px;
+}
+
+.item h1 {
+  text-align: center;
+}
+
+textarea {
+  width: 28vw;
+  height: 85vh;
+  border: 1px solid pink;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  color: pink;
+}
+
+body {
+  background-color: black;
+}
+
+.submit {
+  margin-right: 0vw;
+}
+
+#code1 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code2 {
+  width: 22vw;
+  height: 10vh;
+}
+#code3 {
+  width: 22vw;
+  height: 10vh;
+}
+#code4 {
+  width: 22vw;
+  height: 10vh;
+}
+#code5 {
+  width: 22vw;
+  height: 10vh;
+}
+#code6 {
+  width: 22vw;
+  height: 10vh;
+}
+#code7 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code9 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code10 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code11 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code12 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code13 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code14 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code15 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code16 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code17 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code18 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code19 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code20 {
+  width: 22vw;
+  height: 10vh;
+}
+
+#code21 {
+  width: 22vw;
+  height: 10vh;
+}
+
+header {
+  font-family: "JetBrains Mono", monospace;
+}
+
+header {
+  color: pink;
+  text-align: center;
+}
+textarea {
+  font-family: "JetBrains Mono", monospace;
+  background-color: black;
+  color: whitesmoke;
+}
+
+#_submit1 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+#_submit2 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+#_submit3 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+#_submit4 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+#_submit5 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+#_submit6 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+#_submit7 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit9 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit10 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit11 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit12 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit13 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit14 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit15 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit16 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit17 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit18 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit19 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit20 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+#_submit21 {
+  border: 1px solid pink;
+  background-color: rgba(0, 0, 0, 0);
+  color: pink;
+  padding: 5px;
+}
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  padding-right: 20vw;
+  padding-left: 20vw;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.previous {
+  text-align: left;
+  font-size: 30px;
+  font-weight: 500;
+}
+.next {
+  text-align: right;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+a {
+  color: pink;
+}
+
+table {
+  border: 1px solid pink;
+}
+
+td {
+  border: 1px solid pink;
+}
+.previous {
+  font-size: 30px;
+}
